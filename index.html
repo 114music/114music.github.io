@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音樂會網站</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(90deg, #e0f7fa, #f3e5f5);
+            background-size: 400% 400%; /* 增加背景大小以實現流動效果 */
+            animation: gradient 15s ease infinite; /* 設定動畫 */
+            color: #333;
+            overflow-x: hidden; /* 防止橫向滾動 */
+            justify-content: center;
+            align-items:center;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background: linear-gradient(90deg, #a3c1e0, #d6b5e1);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 20px; /* 更圓角 */
+            margin: 20px; /* 外邊距 */
+            
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        section {
+            padding: 20px;
+            margin: 20px 20px;
+            align-items:center;
+            background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
+            border-radius: 20px; /* 更圓角 */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 80%;
+            backdrop-filter: blur(10px); /* 毛玻璃效果 */
+        }
+        h2 {
+            color: #a3c1e0;
+            border-bottom: 2px solid #a3c1e0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .info {
+            margin: 10px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px; /* 更圓角 */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* 左對齊 */
+            border: 2px solid #a3c1e0; /* 邊框 */
+        }
+        .info h3 {
+            margin: 0;
+            font-size: 1.8em;
+            color: #333;
+            text-align: center;
+        }
+        .info p {
+            margin: 5px 0; /* 調整段落間距 */
+            font-size: 1.1em; /* 調整字體大小 */
+        }
+        .countdown {
+            font-size: 1.5em;
+            color: #a3c1e0; 
+            margin: 15px 0;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .progress-container {
+            width: 100%;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-bar {
+            height: 20px;
+            background: linear-gradient(90deg, #a3c1e0, #f7c6d0); /* 流動漸層 */
+            background-size: 200% 100%; /* 增加背景大小以實現流動效果 */
+            width: 0%;
+            transition: width 1s ease; /* 平滑過渡效果 */
+            animation: flow 3s linear infinite; /* 設定流動動畫，增加時間以使其更自然 */
+        }
+        @keyframes flow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 0%; }
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            border-radius: 10px; /* 更圓角 */
+            overflow: hidden; /* 隱藏邊框 */
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background: #a3c1e0;
+            color: white;
+            border-radius: 10px 10px 0 0; /* 更圓角 */
+            font-weight: bold;
+        }
+        td {
+            background: #f7f7f7;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s; /* 加入變換效果 */
+            cursor: pointer; /* 指標變為手形 */
+            border: 1px solid #ddd; /* 增加邊框 */
+        }
+        td:hover {
+            background: #e0f7fa; /* 懸停效果 */
+            transform: scale(1.02); /* 提升效果 */
+        }
+        .details {
+            display: none; /* 隱藏詳細資訊 */
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .download-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #a3c1e0;
+            color: white;
+            border: none;
+            border-radius: 20px; /* 更圓角 */
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.2s;
+        }
+        .download-btn:hover {
+            background-color: #88b3c4; /* 懸停效果 */
+            transform: translateY(-2px); /* 提升效果 */
+        }
+        .toggle-button {
+            background: linear-gradient(90deg, #a3c1e0, #d6b5e1); /* 漸層背景 */
+            color: white;
+            border: none;
+            border-radius: 20px; /* 更圓角 */
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .toggle-button:hover {
+            background: linear-gradient(90deg, #88b3c4, #d6b5e1); /* 懸停效果 */
+            transform: translateY(-2px); /* 提升效果 */
+        }
+        .youtube-embed {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9比例 */
+            border-radius: 20px; /* 更圓角 */
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: #333;
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            border-radius: 10px; /* 更圓角 */
+        }
+
+        /* 懸浮回報按鈕樣式 */
+        .feedback-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(90deg, #a3c1e0, #d6b5e1); /* 漸層背景 */
+            color: white;
+            border: none;
+            border-radius: 50%; /* 圓形按鈕 */
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .feedback-button:hover {
+            background: linear-gradient(90deg, #88b3c4, #d6b5e1); /* 懸停效果 */
+        }
+    </style>
+    <script>
+        function toggleDetails(index) {
+            const details = document.getElementById(`details-${index}`);
+            if (details.style.display === "none" || details.style.display === "") {
+                details.style.display = "block";
+                setTimeout(() => {
+                    details.style.display = "none"; // 5秒後隱藏
+                }, 5000);
+            } else {
+                details.style.display = "none";
+            }
+        }
+
+        function startCountdown() {
+            const countdownDate = new Date("2025-05-29T09:00:00").getTime();
+            const countdownElement = document.getElementById("countdown");
+            const countdownSection = document.querySelector("section:nth-of-type(1)"); // 獲取倒數區塊
+            const progressBar = document.querySelector(".progress-bar");
+
+            // 設定進度條的開始日期為 5 月 1 日
+            const startDate = new Date("2025-05-01T00:00:00").getTime(); // 5 月 1 日的開始時間
+
+            const interval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `${days}天 ${hours}小時 ${minutes}分鐘 ${seconds}秒`;
+
+                // 計算進度條的寬度
+                const totalDuration = countdownDate - startDate; // 從 5 月 1 日到音樂會的總時間
+                const elapsedTime = now - startDate; // 已經過的時間
+                const progressPercentage = (elapsedTime / totalDuration) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+
+                if (distance < 0) {
+                    clearInterval(interval);
+                    countdownElement.innerHTML = "音樂會開始了！";
+                    countdownSection.style.display = "none"; // 隱藏倒數區塊
+                }
+            }, 1000);
+        }
+
+        function toggleProgram(half) {
+            const upperHalf = document.getElementById("upper-half");
+            const lowerHalf = document.getElementById("lower-half");
+            const upperTitle = document.getElementById("upper-title");
+            const lowerTitle = document.getElementById("lower-title");
+
+            if (half === 'upper') {
+                upperHalf.style.display = "table";
+                lowerHalf.style.display = "none";
+                upperTitle.style.display = "block";
+                lowerTitle.style.display = "none";
+            } else {
+                upperHalf.style.display = "none";
+                lowerHalf.style.display = "table";
+                upperTitle.style.display = "none";
+                lowerTitle.style.display = "block";
+            }
+        }
+
+        window.onload = function() {
+            startCountdown(); // 當頁面加載時啟動倒數計時器
+            toggleProgram('upper'); // 預設顯示上半場
+        };
+
+        function showFeedback() {
+            alert("感謝您的回饋！"); // 這裡可以替換成實際的回饋功能
+        }
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>音樂會名稱</h1>
+</header>
+
+<section>
+    <h2>倒數計時</h2>
+    <div class="countdown" id="countdown">倒數計時中...</div>
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+</section>
+
+<section>
+    <h2>音樂會介紹</h2>
+    <p>這場音樂會將展現多位音樂家的才華，帶來精彩的表演，讓觀眾沉浸在音樂的世界中。無論是古典樂曲還是現代音樂，這場音樂會都將是一場視聽盛宴。</p>
+</section>
+
+<section>
+    <h2>音樂會資訊</h2>
+    <div class="info">
+        <h3>誠摯邀請您參加</h3>
+        <p><strong>時間：</strong>2025.05.29 9:00 AM</p>
+        <p><strong>地點：</strong>視聽教室</p>
+        <p><strong>指導老師：</strong>柯老師、黃老師、吳老師</p>
+        <p>我們期待您的光臨，與我們一起享受音樂的魅力！</p>
+    </div>
+</section>
+
+<section class="program">
+    <h2>節目表</h2>
+    <button class="toggle-button" onclick="toggleProgram('upper')">上半場</button>
+    <button class="toggle-button" onclick="toggleProgram('lower')">下半場</button>
+
+    <h3 id="upper-title">上半場</h3>
+    <table id="upper-half">
+        <thead>
+            <tr>
+                <th>編號</th>
+                <th>曲目</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr onclick="toggleDetails(1)">
+                <td>1</td>
+                <td>曲目A</td>
+            </tr>
+            <tr onclick="toggleDetails(2)">
+                <td>2</td>
+                <td>曲目B</td>
+            </tr>
+            <tr onclick="toggleDetails(3)">
+                <td>3</td>
+                <td>曲目C</td>
+            </tr>
+            <tr onclick="toggleDetails(4)">
+                <td>4</td>
+                <td>曲目D</td>
+            </tr>
+            <tr onclick="toggleDetails(5)">
+                <td>5</td>
+                <td>曲目E</td>
+            </tr>
+            <tr onclick="toggleDetails(6)">
+                <td>6</td>
+                <td>曲目F</td>
+            </tr>
+            <tr onclick="toggleDetails(7)">
+                <td>7</td>
+                <td>曲目G</td>
+            </tr>
+            <tr onclick="toggleDetails(8)">
+                <td>8</td>
+                <td>曲目H</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 id="lower-title" style="display: none;">下半場</h3>
+    <table id="lower-half" style="display: none;">
+        <thead>
+            <tr>
+                <th>編號</th>
+                <th>曲目</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr onclick="toggleDetails(9)">
+                <td>9</td>
+                <td>曲目I</td>
+            </tr>
+            <tr onclick="toggleDetails(10)">
+                <td>10</td>
+                <td>曲目J</td>
+            </tr>
+            <tr onclick="toggleDetails(11)">
+                <td>11</td>
+                <td>曲目K</td>
+            </tr>
+            <tr onclick="toggleDetails(12)">
+                <td>12</td>
+                <td>曲目L</td>
+            </tr>
+            <tr onclick="toggleDetails(13)">
+                <td>13</td>
+                <td>曲目M</td>
+            </tr>
+            <tr onclick="toggleDetails(14)">
+                <td>14</td>
+                <td>曲目N</td>
+            </tr>
+            <tr onclick="toggleDetails(15)">
+                <td>15</td>
+                <td>曲目O</td>
+            </tr>
+            <tr onclick="toggleDetails(16)">
+                <td>16</td>
+                <td>曲目P</td>
+            </tr>
+            <tr onclick="toggleDetails(17)">
+                <td>17</td>
+                <td>曲目Q</td>
+            </tr>
+            <tr onclick="toggleDetails(18)">
+                <td>18</td>
+                <td>曲目R</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="path/to/your/file.pdf" class="download-btn" download>下載節目表 (PDF)</a>
+    
+    <!-- 詳細資訊 -->
+    <div id="details-1" class="details">
+        <p><strong>項目：</strong>開場表演</p>
+        <p><strong>曲目：</strong>曲目A</p>
+        <p><strong>表演者：</strong>表演者1</p>
+    </div>
+    <div id="details-2" class="details">
+        <p><strong>項目：</strong>樂團演出</p>
+        <p><strong>曲目：</strong>曲目B</p>
+        <p><strong>表演者：</strong>表演者2</p>
+    </div>
+    <div id="details-3" class="details">
+        <p><strong>項目：</strong>獨奏表演</p>
+        <p><strong>曲目：</strong>曲目C</p>
+        <p><strong>表演者：</strong>表演者3</p>
+    </div>
+    <div id="details-4" class="details">
+        <p><strong>項目：</strong>特別嘉賓演出</p>
+        <p><strong>曲目：</strong>曲目D</p>
+        <p><strong>表演者：</strong>表演者4</p>
+    </div>
+    <div id="details-5" class="details">
+        <p><strong>項目：</strong>結束</p>
+        <p><strong>曲目：</strong>曲目E</p>
+        <p><strong>表演者：</strong>表演者5</p>
+    </div>
+    <!-- 其他詳細資訊 -->
+    <div id="details-6" class="details">
+        <p><strong>項目：</strong>項目6</p>
+        <p><strong>曲目：</strong>曲目F</p>
+        <p><strong>表演者：</strong>表演者6</p>
+    </div>
+    <div id="details-7" class="details">
+        <p><strong>項目：</strong>項目7</p>
+        <p><strong>曲目：</strong>曲目G</p>
+        <p><strong>表演者：</strong>表演者7</p>
+    </div>
+    <div id="details-8" class="details">
+        <p><strong>項目：</strong>項目8</p>
+        <p><strong>曲目：</strong>曲目H</p>
+        <p><strong>表演者：</strong>表演者8</p>
+    </div>
+    <div id="details-9" class="details">
+        <p><strong>項目：</strong>項目9</p>
+        <p><strong>曲目：</strong>曲目I</p>
+        <p><strong>表演者：</strong>表演者9</p>
+    </div>
+    <div id="details-10" class="details">
+        <p><strong>項目：</strong>項目10</p>
+        <p><strong>曲目：</strong>曲目J</p>
+        <p><strong>表演者：</strong>表演者10</p>
+    </div>
+    <div id="details-11" class="details">
+        <p><strong>項目：</strong>項目11</p>
+        <p><strong>曲目：</strong>曲目K</p>
+        <p><strong>表演者：</strong>表演者11</p>
+    </div>
+    <div id="details-12" class="details">
+        <p><strong>項目：</strong>項目12</p>
+        <p><strong>曲目：</strong>曲目L</p>
+        <p><strong>表演者：</strong>表演者12</p>
+    </div>
+    <div id="details-13" class="details">
+        <p><strong>項目：</strong>項目13</p>
+        <p><strong>曲目：</strong>曲目M</p>
+        <p><strong>表演者：</strong>表演者13</p>
+    </div>
+    <div id="details-14" class="details">
+        <p><strong>項目：</strong>項目14</p>
+        <p><strong>曲目：</strong>曲目N</p>
+        <p><strong>表演者：</strong>表演者14</p>
+    </div>
+    <div id="details-15" class="details">
+        <p><strong>項目：</strong>項目15</p>
+        <p><strong>曲目：</strong>曲目O</p>
+        <p><strong>表演者：</strong>表演者15</p>
+    </div>
+    <div id="details-16" class="details">
+        <p><strong>項目：</strong>項目16</p>
+        <p><strong>曲目：</strong>曲目P</p>
+        <p><strong>表演者：</strong>表演者16</p>
+    </div>
+    <div id="details-17" class="details">
+        <p><strong>項目：</strong>項目17</p>
+        <p><strong>曲目：</strong>曲目Q</p>
+        <p><strong>表演者：</strong>表演者17</p>
+    </div>
+    <div id="details-18" class="details">
+        <p><strong>項目：</strong>項目18</p>
+        <p><strong>曲目：</strong>曲目R</p>
+        <p><strong>表演者：</strong>表演者18</p>
+    </div>
+</section>
+
+<section class="youtube-embed">
+    <h2>直播觀看</h2>
+    <div class="iframe-container">
+        <iframe src="https://www.youtube.com/embed/你的影片ID" frameborder="0" allowfullscreen></iframe>
+    </div>
+</section>
+
+<!-- 懸浮回報按鈕 -->
+<button class="feedback-button" onclick="showFeedback()">💬</button>
+
+<footer>
+    <p>© 2025 音樂會網站. 版權所有.</p>
+</footer>
+
+</body>
+</html>
