@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>音樂會籌備網站</title>
+    <title>音樂會倒數計時</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -14,6 +14,9 @@
             animation: gradient 15s ease infinite; /* 設定動畫 */
             color: #333;
             overflow-x: hidden; /* 防止橫向滾動 */
+            display: flex; /* 使用flexbox */
+            flex-direction: column; /* 垂直排列 */
+            align-items: center; /* 水平置中 */
         }
 
         @keyframes gradient {
@@ -30,19 +33,22 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             border-radius: 20px; /* 更圓角 */
             margin: 20px; /* 外邊距 */
+            width:90%;
         }
         h1 {
             margin: 0;
-            font-size: 2.1em;
+            font-size: 2.5em;
         }
         section {
             padding: 20px;
-            margin: 20px 20px;
+            margin: 20px;
             background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
             border-radius: 20px; /* 更圓角 */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             max-width: 800px;
             backdrop-filter: blur(10px); /* 毛玻璃效果 */
+            width: 90%; /* 使section寬度為100% */
+            box-sizing: border-box; /* 包含內邊距和邊框在內的寬度計算 */
         }
         h2 {
             color: #a3c1e0;
@@ -114,7 +120,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start; /* 左對齊 */
-            border: 0px solid #a3c1e0; /* 邊框 */
+            border:  0px solid #a3c1e0; /* 邊框 */
         }
         .info h3 {
             margin: 0;
@@ -176,8 +182,7 @@
 <body>
 
 <header>
-    <h1>獅甲國小113學年度</h1>
-    <h1>畢業音樂會</h1>
+    <h1>音樂會名稱</h1>
 </header>
 
 <section>
@@ -195,10 +200,10 @@
 <section>
     <h2>音樂會資訊</h2>
     <div class="info">
+        <p><strong>主持人：</strong>陳澐禎 主任</p>
         <p><strong>時間：</strong>2025.05.29 9:00 AM</p>
         <p><strong>地點：</strong>視聽教室</p>
         <p><strong>指導老師：</strong>柯老師、黃老師、吳老師</p>
-        <p>我們期待您的光臨，與我們一起享受音樂的魅力！</p>
     </div>
 </section>
 
