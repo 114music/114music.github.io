@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>113學年度畢業音樂會</title>
     <style>
+
         body {
             font-family: 'Arial', sans-serif;
-            margin: 0 auto;
+            margin: 0;
             padding: 0;
             width:90%;
-            max-width:800px;
             background: linear-gradient(90deg, #e0f7fa, #f3e5f5);
             background-size: 400% 400%; /* 增加背景大小以實現流動效果 */
-            animation: gradient 3s ease infinite; /* 設定動畫 */
+            animation: gradient 15s ease infinite; /* 設定動畫 */
             color: #333;
             overflow-x: hidden; /* 防止橫向滾動 */
+            display: flex; /* 使用flexbox */
+            flex-direction: column; /* 垂直排列 */
+            align-items: center; /* 水平置中 */
         }
 
         @keyframes gradient {
@@ -28,7 +31,7 @@
             background: linear-gradient(90deg, #88B0D7, #d6b5e1);
             color: #fff;
             padding: 20px 0;
-            width:85%;
+            width:90%;
             text-align: center;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             border-radius: 20px; /* 更圓角 */
@@ -41,15 +44,19 @@
             margin: 0;
             font-size: 2.0em;
         }
+
         section {
             padding: 20px;
-            margin: 20px 20px;
-            align-items:center;
-            background: rgba(255, 255, 255, 0.5); /* 半透明背景 */
+            margin: 20px;
+            background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
             border-radius: 20px; /* 更圓角 */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            max-width: 80%;
+            max-width: 800px;
             backdrop-filter: blur(10px); /* 毛玻璃效果 */
+            width: 90%; /* 使section寬度為100% */
+            box-sizing: border-box; /* 包含內邊距和邊框在內的寬度計算 */
+        }
+
         }
         h2 {
             color: #88B0D7;
