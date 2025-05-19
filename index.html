@@ -34,6 +34,8 @@
             border-radius: 20px; /* 更圓角 */
             margin: 20px; /* 外邊距 */
             width:90%;
+            max-width: 600px;
+            
         }
         h1 {
             margin: 0;
@@ -42,10 +44,10 @@
         section {
             padding: 20px;
             margin: 20px;
-            background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
+            background: rgba(255, 255, 255, 0.5); /* 半透明背景 */
             border-radius: 20px; /* 更圓角 */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            max-width: 800px;
+            max-width: 600px;
             backdrop-filter: blur(10px); /* 毛玻璃效果 */
             width: 90%; /* 使section寬度為100% */
             box-sizing: border-box; /* 包含內邊距和邊框在內的寬度計算 */
@@ -80,7 +82,7 @@
             background-size: 200% 100%; /* 增加背景大小以實現流動效果 */
             width: 0%;
             transition: width 1s ease; /* 平滑過渡效果 */
-            animation: flow 3s linear infinite; /* 設定流動動畫，增加時間以使其更自然 */
+            animation: gradient 3s ease infinite; /* 設定流動動畫，增加時間以使其更自然 */
         }
         @keyframes flow {
             0% { background-position: 0% 0%; }
@@ -111,10 +113,10 @@
         .continue-button {
             display: none; /* 初始隱藏 */
         }
-        .info {
+        #.info {
             margin: 10px 0;
             padding: 15px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 15px; /* 更圓角 */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             display: flex;
@@ -132,6 +134,26 @@
             margin: 5px 0; /* 調整段落間距 */
             font-size: 1.1em; /* 調整字體大小 */
         }
+        .transparent-table {
+            width: 100%;
+            border-collapse: collapse; /* 合併邊框 */
+            background: rgba(255, 255, 255, 0.5); /* 半透明背景 */
+            border-radius: 15px; /* 更圓角 */
+            overflow: hidden; /* 隱藏溢出 */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* 陰影效果 */
+        }
+        .transparent-table th, .transparent-table td {
+            padding: 15px; /* 內邊距 */
+            text-align: left; /* 左對齊 */
+            border-bottom: 0px solid rgba(163, 193, 224, 0.5); /* 半透明邊框 */
+        }
+        .transparent-table th {
+            background: rgba(163, 193, 224, 0.2); /* 半透明表頭背景 */
+            color: #333; /* 表頭文字顏色 */
+        }
+        .transparent-table tr:hover {
+            background: rgba(163, 193, 224, 0.3); /* 懸停效果 */
+        }
     </style>
     <script>
         function startCountdown() {
@@ -141,7 +163,6 @@
             const reserveButton = document.querySelector(".reserve-button");
             const continueButton = document.querySelector(".continue-button");
 
-            // 設定進度條的開始日期為 5 月 1 日
             const startDate = new Date("2025-05-01T00:00:00").getTime(); // 5 月 1 日的開始時間
 
             const interval = setInterval(() => {
@@ -155,7 +176,6 @@
 
                 countdownElement.innerHTML = `${days}天 ${hours}小時 ${minutes}分鐘 ${seconds}秒`;
 
-                // 計算進度條的寬度
                 const totalDuration = countdownDate - startDate; // 從 5 月 1 日到音樂會的總時間
                 const elapsedTime = now - startDate; // 已經過的時間
                 const progressPercentage = (elapsedTime / totalDuration) * 100;
@@ -201,10 +221,32 @@
 <section>
     <h2>音樂會資訊</h2>
     <div class="info">
-        <p><strong>主持人：</strong>陳澐禎 主任</p>
-        <p><strong>時間：</strong>2025.05.29 上午 9:00 ～ 11：00</p>
-        <p><strong>地點：</strong>視聽教室</p>
-        <p><strong>指導老師：</strong>柯老師、黃老師、吳老師</p>
+        <table class="transparent-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>內容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>主持人</td>
+                    <td>陳澐禎 主任</td>
+                </tr>
+                <tr>
+                    <td>時間</td>
+                    <td>2025.05.29 上午 9:00 ～ 11:00</td>
+                </tr>
+                <tr>
+                    <td>地點</td>
+                    <td>視聽教室</td>
+                </tr>
+                <tr>
+                    <td>指導老師</td>
+                    <td>柯老師、黃老師、吳老師</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </section>
 
