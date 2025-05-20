@@ -48,7 +48,7 @@
         section {
             padding: 20px;
             margin: 20px;
-            background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
+            background: rgba(255, 255, 255, 0.6); /* 半透明背景 */
             border-radius: 20px; /* 更圓角 */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             max-width: 800px;
@@ -57,17 +57,16 @@
             box-sizing: border-box; /* 包含內邊距和邊框在內的寬度計算 */
         }
 
-        }
         h2 {
             color: #88B0D7;
             border-bottom: 2px solid #88B0D7;
             padding-bottom: 10px;
             margin-bottom: 15px;
         }
-        .info {
+        #.info {
             margin: 10px 0;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0);
             border-radius: 15px; /* 更圓角 */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             display: flex;
@@ -110,6 +109,27 @@
             width: 0%;
             transition: width 1s ease; /* 平滑過渡效果 */
             animation: gradient 3s ease infinite; /* 設定流動動畫，增加時間以使其更自然 */
+        }
+
+        .transparent-table {
+            width: 100%;
+            border-collapse: collapse; /* 合併邊框 */
+            background: rgba(255, 255, 255, 0.5); /* 半透明背景 */
+            border-radius: 15px; /* 更圓角 */
+            overflow: hidden; /* 隱藏溢出 */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* 陰影效果 */
+        }
+        .transparent-table th, .transparent-table td {
+            padding: 15px; /* 內邊距 */
+            text-align: left; /* 左對齊 */
+            border-bottom: 0px solid rgba(163, 193, 224, 0.5); /* 半透明邊框 */
+        }
+        .transparent-table th {
+            background: rgba(163, 193, 224, 0.2); /* 半透明表頭背景 */
+            color: #333; /* 表頭文字顏色 */
+        }
+        .transparent-table tr:hover {
+            background: rgba(163, 193, 224, 0.3); /* 懸停效果 */
         }
         @keyframes flow {
             0% { background-position: 0% 0%; }
@@ -337,10 +357,26 @@
 <section>
     <h2>音樂會資訊</h2>
     <div class="info">
-        <p><strong>主持人：</strong>陳澐禎 主任</p>
-        <p><strong>時間：</strong>114.05.29 上午9:00~11:00</p>
-        <p><strong>地點：</strong>獅甲國小3F視聽教室</p>
-        <p><strong>指導老師：</strong>柯老師、黃老師、吳老師</p>
+        <table class="transparent-table">
+            <tbody>
+                <tr>
+                    <td><strong>主持人</strong></td>
+                    <td>陳澐禎 主任</td>
+                </tr>
+                <tr>
+                    <td><strong>時間</strong></td>
+                    <td>2025.05.29 上午 9:00 ～ 11:00</td>
+                </tr>
+                <tr>
+                    <td><strong>地點</strong></td>
+                    <td>獅甲國小 3F視聽教室</td>
+                </tr>
+                <tr>
+                    <td><strong>指導老師</strong></td>
+                    <td>柯育吟、黃婉倫、吳泳潔</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </section>
 
