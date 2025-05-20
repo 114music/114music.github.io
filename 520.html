@@ -27,7 +27,7 @@
             max-width: 600px;
             width: 100%; /* 使寬度佔滿 */
             margin: auto;
-            background: rgba(255, 255, 255, 0.6); /* 磨砂半透明背景 */
+            background: rgba(255, 255, 255, 0.8); /* 磨砂半透明背景 */
             border-radius: 15px; /* 更大的圓角 */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* 更明顯的陰影 */
             overflow: hidden;
@@ -36,8 +36,7 @@
         }
         
         .contact-title {
-
-            background: rgba(255, 255, 255, 0.9); /* 磨砂半透明背景 */
+            background: linear-gradient(135deg, #ff69b4, #d6c1e6); /* 漸層背景 - 粉紫色 */
             -webkit-background-clip: text; /* 文字背景剪裁 */
             -webkit-text-fill-color: transparent; /* 文字填充透明 */
             padding: 15px;
@@ -104,7 +103,7 @@
             padding: 15px; /* 增加內邊距 */
             margin-left: 10px;
             border: none;
-            border-radius: 20px;
+            border-radius: 10px;
             background-color: #ff69b4;
             color: white;
             cursor: pointer;
@@ -191,8 +190,8 @@
 <div id="qrModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <h2>恭喜你，你成功發現了一個新按鈕！</h2>
-        <button class="new-button" onclick="openLink()">按鈕連結</button>
+        <h2 id="modal-message">恭喜你，你成功打開了神奇寶箱！</h2>
+        <button class="new-button" onclick="openLink()">快點我</button>
     </div>
 </div>
 
@@ -208,10 +207,22 @@
         // 顯示「輸入中...」提示
         addTypingIndicator();
 
-        // 檢查是否為520
+        // 檢查用戶輸入的內容
         if (userMessage.trim() === "520") {
             setTimeout(() => {
-                showModal();
+                showModal("恭喜你，你成功打開了神奇寶箱！");
+                removeTypingIndicator();
+            }, 1000);
+            return;
+        } else if (userMessage.trim() === "您好" || userMessage.trim() === "你好") {
+            setTimeout(() => {
+                addMessage("您好，今天是520，是個特別的日子", 'ai');
+                removeTypingIndicator();
+            }, 1000);
+            return;
+        } else if (userMessage.trim() === "給我錢") {
+            setTimeout(() => {
+                addMessage("要有通關密語", 'ai');
                 removeTypingIndicator();
             }, 1000);
             return;
@@ -219,7 +230,7 @@
 
         // 模擬戀愛機器人回覆
         setTimeout(() => {
-            const aiResponse = getAIResponse(userMessage);
+            const aiResponse = getRandomSweetTalk();
             typeWriter(aiResponse, 'ai'); // 使用打字機效果
             removeTypingIndicator();
         }, 1000);
@@ -268,18 +279,30 @@
         chatBox.scrollTop = chatBox.scrollHeight; // 滾動到最底部
     }
 
-    function getAIResponse(userMessage) {
-        const responses = [
-            "你的微笑讓我心跳加速！",
-            "愛情就像星星，雖然看不見，但我知道它在那裡。",
-            "如果你是一首歌，我會每天都想聽。",
+    function getRandomSweetTalk() {
+        const sweetTalks = [
+            "愛情是你我之間最美的約定。",
+            "你的笑容是我心中最亮的星星。",
+            "每一次心跳，都是為你而跳。",
+            "和你在一起的每一刻，都是我最珍貴的時光。",
+            "你的存在讓我的世界變得更加美好。",
+            "我願意用一生來守護你的微笑。",
+            "在這個特別的日子裡，我只想和你分享我的心。",
+            "你是我生命中最美的意外。",
+            "無論距離多遠，我的心永遠與你相伴。",
+            "你的每一句話，都讓我心動不已。",
             "我希望能和你一起走過每一個春夏秋冬。",
-            "你是我心中最美的風景。"
+            "每當我想到你，心中就充滿了幸福。",
+            "愛情不需要華麗的言語，只需要真摯的心。",
+            "你的眼睛裡有我想要的整個世界。",
+            "我會永遠珍惜我們之間的每一個瞬間。",
+            "在這個浪漫的日子裡，讓我告訴你：我愛你！"
         ];
-        return responses[Math.floor(Math.random() * responses.length)];
+        return sweetTalks[Math.floor(Math.random() * sweetTalks.length)];
     }
 
-    function showModal() {
+    function showModal(message) {
+        $('#modal-message').text(message); // 更新模態框訊息
         $('#qrModal').css('display', 'flex');
     }
 
