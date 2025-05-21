@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>113學年度畢業音樂會</title>
+    <style>
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(90deg, #e0f7fa, #f3e5f5);
+            background-size: 400% 400%; /* 增加背景大小以實現流動效果 */
+            animation: gradient 15s ease infinite; /* 設定動畫 */
+            color: #333;
+            overflow-x: hidden; /* 防止橫向滾動 */
+            display: flex; /* 使用flexbox */
+            flex-direction: column; /* 垂直排列 */
+            align-items: center; /* 水平置中 */
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background: linear-gradient(90deg, #a3c1e0, #d6b5e1);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 20px; /* 更圓角 */
+            margin: 20px; /* 外邊距 */
+            width:90%;
+            max-width: 600px;
+}
+        h1 {
+            margin: 0;
+            font-size: 2.0em;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px;
+            background: rgba(255, 255, 255, 0.6); /* 半透明背景 */
+            border-radius: 20px; /* 更圓角 */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            backdrop-filter: blur(10px); /* 毛玻璃效果 */
+            width: 90%; /* 使section寬度為100% */
+            box-sizing: border-box; /* 包含內邊距和邊框在內的寬度計算 */
+        }
+
+        h2 {
+            color: #88B0D7;
+            border-bottom: 2px solid #88B0D7;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            color: #7B7B7B;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+         .floating-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            font-size: 30px;
+            cursor: pointer;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .floating-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            #background-color: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.5s;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
+
+            margin: 15% auto;
+            padding: 20px;
+            #border: 1px solid #888;
+            width: 320px;
+            border-radius: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.5s;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 85%;
+            padding: 12px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            transition: border-color 0.3s;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        #.info {
+            margin: 10px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0);
+            border-radius: 15px; /* 更圓角 */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* 左對齊 */
+            border: 0px solid #88B0D7; /* 邊框 */
+        }
+        .info h3 {
+            margin: 0;
+            font-size: 1.8em;
+            color: #46A3FF;
+            text-align: center;
+        }
+        .info p {
+            margin: 5px 0; /* 調整段落間距 */
+            font-size: 1.1em; /* 調整字體大小 */
+        }
+        .countdown {
+            font-size: 1.5em;
+            color: #88B0D7; 
+            margin: 15px 0;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .progress-container {
+            width: 100%;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-bar {
+            height: 20px;
+            background: linear-gradient(90deg, #88B0D7, #f7c6d0); /* 流動漸層 */
+            background-size: 200% 100%; /* 增加背景大小以實現流動效果 */
+            width: 0%;
+            transition: width 1s ease; /* 平滑過渡效果 */
+            animation: gradient 3s ease infinite; /* 設定流動動畫，增加時間以使其更自然 */
+        }
+
+        .transparent-table {
+            width: 100%;
+            border-collapse: collapse; /* 合併邊框 */
+            background: rgba(255, 255, 255, 0.5); /* 半透明背景 */
+            border-radius: 20px; /* 更圓角 */
+            overflow: hidden; /* 隱藏溢出 */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* 陰影效果 */
+        }
+        .transparent-table th, .transparent-table td {
+            padding: 15px; /* 內邊距 */
+            text-align: left; /* 左對齊 */
+            border-bottom: 0px solid rgba(163, 193, 224, 0.2); /* 半透明邊框 */
+        }
+        .transparent-table th {
+            background: rgba(163, 193, 224, 0.2); /* 半透明表頭背景 */
+            color: #333; /* 表頭文字顏色 */
+        }
+        .transparent-table tr:hover {
+            background: rgba(163, 193, 224, 0.3); /* 懸停效果 */
+        }
+        @keyframes flow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 0%; }
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            border-radius: 20px; /* 更圓角 */
+
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* 陰影效果 */
+
+            overflow: hidden; /* 隱藏邊框 */
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background: #88B0D7;
+            color: white;
+            font-weight: bold;
+        }
+        td {
+            background: #f7f7f7;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s; /* 加入變換效果 */
+            cursor: pointer; /* 指標變為手形 */
+            border: 1px solid #ddd; /* 增加邊框 */
+        }
+        td:hover {
+            background: #e0f7fa; /* 懸停效果 */
+            transform: scale(1.02); /* 提升效果 */
+        }
+        .details {
+            display: none; /* 隱藏詳細資訊 */
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .download-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #88B0D7;
+            color: white;
+            border: none;
+            border-radius: 20px; /* 更圓角 */
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.2s;
+        }
+        .download-btn:hover {
+            background-color: #88b3c4; /* 懸停效果 */
+            transform: translateY(-2px); /* 提升效果 */
+        }
+        .toggle-button {
+            background: linear-gradient(90deg, #88B0D7, #d6b5e1); /* 漸層背景 */
+            color: white;
+            border: none;
+            border-radius: 20px; /* 更圓角 */
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .toggle-button:hover {
+            background: linear-gradient(90deg, #88b3c4, #d6b5e1); /* 懸停效果 */
+            transform: translateY(-2px); /* 提升效果 */
+        }
+        .youtube-embed {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9比例 */
+            border-radius: 20px; /* 更圓角 */
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: #333;
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 10px; /* 更圓角 */
+        }
+        /* 懸浮回報按鈕樣式 */
+        .feedback-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(90deg, #88B0D7, #d6b5e1); /* 漸層背景 */
+            color: white;
+            border: none;
+            border-radius: 50%; /* 圓形按鈕 */
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .feedback-button:hover {
+            background: linear-gradient(90deg, #88b3c4, #d6b5e1); /* 懸停效果 */
+        }
+    </style>
+    <script>
+        function toggleDetails(index) {
+            const details = document.getElementById(`details-${index}`);
+            if (details.style.display === "none" || details.style.display === "") {
+                details.style.display = "block";
+                setTimeout(() => {
+                    details.style.display = "none"; // 5秒後隱藏
+                }, 5000);
+            } else {
+                details.style.display = "none";
+            }
+        }
+
+        function startCountdown() {
+            const countdownDate = new Date("2025-05-29T09:00:00").getTime();
+            const countdownElement = document.getElementById("countdown");
+            const countdownSection = document.querySelector("section:nth-of-type(1)"); // 獲取倒數區塊
+            const progressBar = document.querySelector(".progress-bar");
+
+            // 設定進度條的開始日期為 5 月 28 日
+            const startDate = new Date("2025-05-01T00:00:00").getTime(); // 5 月 1 日的開始時間
+
+            const interval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `${days}天 ${hours}小時 ${minutes}分鐘 ${seconds}秒`;
+
+                // 計算進度條的寬度
+                const totalDuration = countdownDate - startDate; // 從 5 月 1 日到音樂會的總時間
+                const elapsedTime = now - startDate; // 已經過的時間
+                const progressPercentage = (elapsedTime / totalDuration) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+
+                if (distance < 0) {
+                    clearInterval(interval);
+                    countdownElement.innerHTML = "音樂會開始了！";
+                    countdownSection.style.display = "none"; // 隱藏倒數區塊
+                }
+            }, 1000);
+        }
+
+        function toggleProgram(half) {
+            const upperHalf = document.getElementById("upper-half");
+            const lowerHalf = document.getElementById("lower-half");
+            const upperTitle = document.getElementById("upper-title");
+            const lowerTitle = document.getElementById("lower-title");
+
+            if (half === 'upper') {
+                upperHalf.style.display = "table";
+                lowerHalf.style.display = "none";
+                upperTitle.style.display = "block";
+                lowerTitle.style.display = "none";
+            } else {
+                upperHalf.style.display = "none";
+                lowerHalf.style.display = "table";
+                upperTitle.style.display = "none";
+                lowerTitle.style.display = "block";
+            }
+        }
+
+        window.onload = function() {
+            startCountdown(); // 當頁面加載時啟動倒數計時器
+            toggleProgram('upper'); // 預設顯示上半場
+        };
+
+        function showFeedback() {
+            alert("功能尚在測試中，請耐心等待！"); // 這裡可以替換成實際的回饋功能
+        }
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>獅甲國小113學年度</h1>
+    <h1>畢業音樂會</h1>
+</header>
+
+<section>
+    <h2>距離音樂會</h2>
+    <div class="countdown" id="countdown">倒數計時中...</div>
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+</section>
+
+<section>
+    <h2>音樂會介紹</h2>
+    <h3><strong> 親愛的家長們：</strong></h3>
+
+<h3><strong>今天的畢業音樂會是孩子們努力的成果展示。音樂是一種美妙的語言，它能傳遞情感與故事。我們希望您能在現場見證他們的成長，並感受到他們在舞台上展現的自信。讓我們一起享受每一個音符，並祝福他們在未來的每一步都能帶著這份熱情。願音樂永遠與您的孩子同在！
+
+感謝您的支持與陪伴！ </strong></h3>
+
+    <h2>音樂會資訊</h2>
+    <div class="info">
+        <table class="transparent-table">
+            <tbody>
+                <tr>
+                    <td><strong>主持人</strong></td>
+                    <td><p>陳澐禎 主任</td>
+                </tr>
+                <tr>
+                    <td><strong>時間</strong></td>
+                    <td><p>2025.05.29</p><p> 上午 9:00 ～ 11:00</p></td>
+                </tr>
+                <tr>
+                    <td><strong>地點</strong></td>
+                    <td>獅甲國小 3F視聽教室</td>
+                </tr>
+                <tr>
+                    <td><strong>指導老師</strong></td>
+                    <td>柯育吟、黃琬棆、吳泳潔</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="program">
+    <h2>節目表</h2>
+    <button class="toggle-button" onclick="toggleProgram('upper')">上半場</button>
+    <button class="toggle-button" onclick="toggleProgram('lower')">下半場</button>
+
+    <h3 id="upper-title">上半場</h3>
+    <table id="upper-half">
+        <thead>
+            <tr>
+                <th>編號</th>
+                <th>曲目</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr onclick="toggleDetails(1)">
+                <td>1</td>
+                <td>Canon</td>
+            </tr>
+            <tr onclick="toggleDetails(2)">
+                <td>2</td>
+                <td>永遠同在、龍貓</td>
+            </tr>
+            <tr onclick="toggleDetails(3)">
+                <td>3</td>
+                <td>Fate</td>
+            </tr>
+            <tr onclick="toggleDetails(4)">
+                <td>4</td>
+                <td>Super Nova</td>
+            </tr>
+            <tr onclick="toggleDetails(5)">
+                <td>5</td>
+                <td>朋友</td>
+            </tr>
+            <tr onclick="toggleDetails(6)">
+                <td>6</td>
+                <td>萬有引力</td>
+            </tr>
+            <tr onclick="toggleDetails(7)">
+                <td>7</td>
+                <td>我只能離開</td>
+            </tr>
+            <tr onclick="toggleDetails(8)">
+                <td>8</td>
+                <td>克萊曼悌 op.36 .no.4</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 id="lower-title" style="display: none;">下半場</h3>
+    <table id="lower-half" style="display: none;">
+        <thead>
+            <tr>
+                <th>編號</th>
+                <th>曲目</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr onclick="toggleDetails(9)">
+                <td>9</td>
+                <td>自言自語</td>
+            </tr>
+            <tr onclick="toggleDetails(10)">
+                <td>10</td>
+                <td>那些年</td>
+            </tr>
+            <tr onclick="toggleDetails(11)">
+                <td>11</td>
+                <td>小幸運</td>
+            </tr>
+            <tr onclick="toggleDetails(12)">
+                <td>12</td>
+                <td>乾杯</td>
+            </tr>
+            <tr onclick="toggleDetails(13)">
+                <td>13</td>
+                <td>那些年你很冒險的夢</td>
+            </tr>
+            <tr onclick="toggleDetails(14)">
+                <td>14</td>
+                <td>Whiplash</td>
+            </tr>
+            <tr onclick="toggleDetails(15)">
+                <td>15</td>
+                <td>江南Style 騎馬舞</td>
+            </tr>
+            <tr onclick="toggleDetails(16)">
+                <td>16</td>
+                <td>青春有你</td>
+            </tr>
+            <tr onclick="toggleDetails(17)">
+                <td>17</td>
+                <td>如果可以</td>
+            </tr>
+            <tr onclick="toggleDetails(18)">
+                <td>18</td>
+                <td>夢想藍圖</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="https://educase.kh.edu.tw/s/QPXNL9TE" class="download-btn" download>下載節目表 (PDF)</a>
+    
+    <!-- 詳細資訊 -->
+    <div id="details-1" class="details">
+        <p><strong>項目：</strong>鋼琴獨奏</p>
+        <p><strong>曲目：</strong>Canon</p>
+        <p><strong>表演者：</strong>【鋼琴】朱奕绮</p>
+    </div>
+    <div id="details-2" class="details">
+        <p><strong>項目：</strong>直笛合奏</p>
+        <p><strong>曲目：</strong>永遠同在、龍貓</p>
+        <p><strong>表演者：</strong>【直笛】楊瓖宭、郭品婕、詹人宥</p>
+        <p>　　　　【三角鐵、鈴鼓】林品延    【鋼琴】 吳泳潔</p>
+
+    </div>
+    <div id="details-3" class="details">
+        <p><strong>項目：</strong>歌唱表演</p>
+        <p><strong>曲目：</strong>Fate</p>
+        <p><strong>表演者：</strong>【演唱】 黃丞綝、洪依晨、陳宥妡、陳玟希</p>
+    </div>
+    <div id="details-4" class="details">
+        <p><strong>項目：</strong>舞蹈表演</p>
+        <p><strong>曲目：</strong>Super Nova</p>
+        <p><strong>表演者：</strong>【舞蹈】 許以妮、沈雯祺、林宜珈、林奕汝</p>
+    </div>
+    <div id="details-5" class="details">
+        <p><strong>項目：</strong>歌唱表演</p>
+        <p><strong>曲目：</strong>朋友</p>
+        <p><strong>表演者：</strong>【演唱】 方昭元</p>
+    </div>
+    <!-- 其他詳細資訊 -->
+    <div id="details-6" class="details">
+        <p><strong>項目：</strong>歌唱表演</p>
+        <p><strong>曲目：</strong>萬有引力</p>
+        <p><strong>表演者：</strong>【演唱】 張庭瑋、陳玟希、卓祉妤</p>
+    </div>
+    <div id="details-7" class="details">
+        <p><strong>項目：</strong>歌唱表演</p>
+        <p><strong>曲目：</strong>我只能離開</p>
+        <p><strong>表演者：</strong>【演唱】 方柏文、楊逸安、謝宥維、高語脩</p>
+    </div>
+    <div id="details-8" class="details">
+        <p><strong>項目：</strong>鋼琴獨奏</p>
+        <p><strong>曲目：</strong>克萊曼悌 op.36 .no.4</p>
+        <p><strong>表演者：</strong>【鋼琴】 顏良諭</p>
+    </div>
+    <div id="details-9" class="details">
+        <p><strong>項目：</strong>直笛合奏</p>
+        <p><strong>曲目：</strong>自言自語</p>
+        <p><strong>表演者：</strong>【直笛】 黃丞綝、廖若妤、陳宥妡</p>
+        <p>　　　　【三角鐵】 洪依晨        【鋼琴】 吳泳潔</p>
+    </div>
+    <div id="details-10" class="details">
+        <p><strong>項目：</strong>歌唱表演</p>
+        <p><strong>曲目：</strong>那些年</p>
+        <p><strong>表演者：</strong>【演唱】 石羽彤、葉金姸、鄭書涵</p>
+        <p>　　　　【小提琴】 黃詠晞</p>
+    </div>
+    <div id="details-11" class="details">
+        <p><strong>項目：</strong>歌唱表演</p>
+        <p><strong>曲目：</strong>小幸運</p>
+        <p><strong>表演者：</strong>【演唱】 宣之晴、莊語柔、張綵鋅</p>
+        <p>　　　　【直笛】 楊瓖宭、郭品婕</p>
+    </div>
+    <div id="details-12" class="details">
+        <p><strong>項目：</strong>歌唱表演</p>
+        <p><strong>曲目：</strong>乾杯</p>
+        <p><strong>表演者：</strong>【演唱】 李博綸、顏立全、馮振維、江泓儒</p>
+    </div>
+    <div id="details-13" class="details">
+        <p><strong>項目：</strong>歌唱表演</p>
+        <p><strong>曲目：</strong>那些年你很冒險的夢</p>
+        <p><strong>表演者：</strong>【演唱】 黃維澤、楊詠崴、顏良諭、陳禹豪、郭晋維</p>
+    </div>
+    <div id="details-14" class="details">
+        <p><strong>項目：</strong>舞蹈表演</p>
+        <p><strong>曲目：</strong>Whiplash</p>
+        <p><strong>表演者：</strong>【舞蹈】 許以妮、沈雯祺、林宜珈、林奕汝</p>
+    </div>
+    <div id="details-15" class="details">
+        <p><strong>項目：</strong>舞蹈表演</p>
+        <p><strong>曲目：</strong>江南Style 騎馬舞</p>
+        <p><strong>表演者：</strong>【舞蹈】 王子澐、林承儒、夏嘉禾、董宸箖</p>
+        <p>　　　　【鈴鼓】 鄭紹廷</p>
+    </div>
+    <div id="details-16" class="details">
+        <p><strong>項目：</strong>歌唱表演</p>
+        <p><strong>曲目：</strong>青春有你</p>
+        <p><strong>表演者：</strong>【演唱】 6-1全體學生</p>
+    </div>
+    <div id="details-17" class="details">
+        <p><strong>項目：</strong>歌唱表演</p>
+        <p><strong>曲目：</strong>如果可以</p>
+        <p><strong>表演者：</strong>【演唱】 6-2全體學生 (歌詞改編:黃琬棆老師)</p>
+    </div>
+    <div id="details-18" class="details">
+        <p><strong>項目：</strong>大合唱</p>
+        <p><strong>曲目：</strong>夢想藍圖</p>
+        <p><strong>表演者：</strong>全體大合唱</p>
+    </div>
+</section>
+
+<section class="youtube-embed">
+    <h2>直播頻道</h2>
+    <div class="iframe-container">
+        <iframe src="https://www.youtube.com/embed/你的影片ID" frameborder="0" allowfullscreen></iframe>
+    </div>
+</section>
+
+
+<!-- 懸浮回報按鈕 -->
+    <button class="feedback-button" onclick="openModal()">💬</button>
+
+    <div id="feedbackModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>回饋表單</h2>
+            <form id="feedbackForm" onsubmit="sendEmail(event)">
+                <label for="name">姓名:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">電子郵件:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">回饋內容:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <input type="submit" value="提交">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('feedbackModal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('feedbackModal').style.display = "none";
+        }
+
+        function sendEmail(event) {
+            event.preventDefault(); // 防止表單的默認提交行為
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            const subject = "回饋表單提交";
+            const body = `姓名: ${name}\n電子郵件: ${email}\n回饋內容:\n${message}`;
+
+            // 使用 mailto 來發送電子郵件
+            window.location.href = `mailto:recipient@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            closeModal(); // 提交後關閉模態窗口
+        }
+    </script>
+
+<footer>
+    <p>© 2025 高雄市前鎮區獅甲國民小學. 版權所有.</p>
+</footer>
+
+</body>
+</html>
