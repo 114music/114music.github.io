@@ -121,17 +121,20 @@
 
         }
 
-        .modal-content {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
-
-            margin: 15% auto;
-            padding: 20px;
-            #border: 1px solid #888;
-            width: 320px;
-            border-radius: 30px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            animation: slideIn 0.5s;
-        }
+         .modal-content {
+              background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
+    
+    position: fixed; /* 使用固定定位 */
+    top: 50%; /* 垂直居中 */
+    left: 50%; /* 水平居中 */
+    transform: translate(-50%, -50%); /* 使元素真正居中 */
+    
+    margin: 0; /* 移除外邊距 */
+    padding: 20px;
+    width: 320px;
+    border-radius: 30px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
 
         .close {
             color: #aaa;
@@ -373,7 +376,7 @@
          iframe {
             width: 100%;
             height: 400px; /* 設定高度 */
-            border-radius: 30px; /* 可選：添加圓角 */
+            border-radius: 20px; /* 可選：添加圓角 */
             border: none; /* 移除邊框 */
         }
 
@@ -784,7 +787,7 @@ adjustHeight();
     <div id="feedbackModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <h2>回報問題</h2>
+            <h2>回饋單</h2>
             <form action="https://docs.google.com/forms/d/e/1FAIpQLSdmXXGSTT0TZgDmwpLztUtDK3jJyDkndkCZEj_nED3q2F-myg/formResponse" method="POST">
                 <label for="entry.1330653098">姓名:</label>
                 <input type="text" id="entry.1330653098" name="entry.1330653098" required>
@@ -793,7 +796,7 @@ adjustHeight();
                 <input type="email" id="entry.662407930" name="entry.662407930" required>
 
                 <label for="entry.1384536821">回饋內容:</label>
-                <textarea id="entry.1384536821" name="entry.1384536821" rows="4" required></textarea>
+                <textarea id="entry.1384536821" name="entry.1384536821" rows="5" required></textarea>
 
 
 
